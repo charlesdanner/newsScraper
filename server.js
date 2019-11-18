@@ -22,6 +22,13 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlin
 
 mongoose.connect(MONGODB_URI);
 
+app.get("/", (req, res) => {
+    db.Article.find()
+    .then(dbArticles => {
+        res.render("articles", {article: dbArticles})
+    })
+})
+
 app.get("/scrape", (req, res) => {
     axios.get("https://www.cbsnews.com/60-minutes/overtime/").then(response => {
         const $ = cheerio.load(response.data);
@@ -36,7 +43,6 @@ app.get("/scrape", (req, res) => {
             }).catch(err => console.log(err));
         });
     });
-    
 })
 
 

@@ -7,18 +7,20 @@
     <h1>Mongo Scraper</h1>
     <p>60 Minutes Edition</p>
   </div>
-  <div class="container-fluid article-container">
-    <div data-_id="5dd2b6724671610015ceaee3" class="card">
-      <div class="card-header">
-        <h3>
-          <a class="article-link" target="_blank" rel="noopener noreferrer"
-            href="https://www.nytimes.com/2019/11/15/the-weekly/el-chapo-guzman-son.html">‘The Weekly’: Inside the
-            Mayhem to Rescue El Chapo’s Son</a>
-          <a class="btn btn-success save">Save Article</a>
-        </h3>
-      </div>
-      <div class="card-body">The full episode is available to Times subscribers in the U.S. Cartel gunmen waged war
-        against the Mexican army – and won.</div>
+</div>
+
+
+<div class="container-fluid article-container">
+  {{#each article}}
+  <div data-_id="{{this._id}}" class="card">
+    <div class="card-header">
+      <h3>
+        <a class="article-link" target="_blank" rel="noopener noreferrer"
+          href="{{this.link}}">{{this.title}}</a>
+        <a class="btn btn-success save">Save Article</a>
+      </h3>
     </div>
+    <div class="card-body">{{this.summary}}</div>
   </div>
+  {{/each}}
 </div>
