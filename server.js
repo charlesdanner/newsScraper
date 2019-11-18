@@ -27,21 +27,16 @@ app.get("/scrape", (req, res) => {
         const $ = cheerio.load(response.data);
 
         $(".asset-wrapper").each((i, element) => {
-            result = {};
-            result.title = $(element).children("a").children("h4").text();
-            console.log(`Title ${i}: ${result.title}`)
-            result.summary = $(element).children("p").text();
-            result.link = $(element).children("a").attr("href");
-            console.log(result)
-
-            // db.Article.create(result).then(dbArticle => {
-            //     console.log(dbArticle)
-            // })
-            // .catch(err => console.log(err));
-        })
-    })
-
-    res.json({scrape: "complete"});
+            db.Article.create({
+                title: $(element).children("a").children("h4").text(),
+                summary: $(element).children("p").text(),
+                link: "https://www.cbsnews.com/news/" + $(element).children("a").attr("href")
+            }).then(dbArticle => {
+                res.json({ scrape: "complete" });
+            }).catch(err => console.log(err));
+        });
+    });
+    
 })
 
 
