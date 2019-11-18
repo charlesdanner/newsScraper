@@ -23,6 +23,8 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlin
 mongoose.connect(MONGODB_URI);
 
 app.get("/", (req, res) => {
+
+    
     res.render("articles")
 })
 
