@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     articleContainer.addEventListener("click", event => {
         if (this.event.target.id === "saveButton") {
+            const cardContainer = this.event.target.parentElement.parentElement.parentElement
 
             const data = {
                 title: this.event.target.getAttribute('data-title'),
@@ -12,15 +13,11 @@ document.addEventListener("DOMContentLoaded", event => {
                 link: this.event.target.getAttribute('data-link')
             }
 
-
-            console.log(this.event.target.parentElement)
-
             $.ajax({
                 method: "POST",
                 url: "/save",
                 data: data
-            })
-                .then(result => console.log(result))
+            }).then(result => cardContainer.style.display = "none")
         }
 
     })
@@ -32,7 +29,7 @@ document.addEventListener("DOMContentLoaded", event => {
         })
             // With that done, add the note information to the page
             .then(function (data) {
-
+                
             })
     })
 
