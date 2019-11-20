@@ -58,7 +58,11 @@ app.get("/scrape", (req, res) => {
     
 })
 
-
+app.get("/saved", (req, res) => {
+    db.Article.find().then(dbArticle => { 
+        res.render("saved", {article: dbArticle} )
+    })
+})
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}!`));
 

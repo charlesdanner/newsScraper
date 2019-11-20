@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", event => {
 
     })
 
+        
+
     scraperBtn.addEventListener("click", event => {
         $.ajax({
             method: "GET",
