@@ -12,17 +12,15 @@ document.addEventListener("DOMContentLoaded", event => {
                 summary: this.event.target.getAttribute('data-summary'),
                 link: this.event.target.getAttribute('data-link')
             }
-
             $.ajax({
                 method: "POST",
                 url: "/save",
                 data: data
-            }).then(result => cardContainer.style.display = "none")
-        }
+            }).then(result => cardContainer.parentElement.removeChild(cardContainer));
+        };
+    });
 
-    })
 
-        
 
     scraperBtn.addEventListener("click", event => {
         $.ajax({
@@ -31,7 +29,7 @@ document.addEventListener("DOMContentLoaded", event => {
         })
             // With that done, add the note information to the page
             .then(function (data) {
-                
+
             })
     })
 
