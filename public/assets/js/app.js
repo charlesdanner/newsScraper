@@ -48,12 +48,13 @@ document.addEventListener("DOMContentLoaded", event => {
     });
 
     const populateCommentList = (input) => {
-            let notes = ""
-            input.forEach(note => {
-                let li = `<li class="list-group-item">${note}</li>`
-                notes = notes + li
-            })
-            noteList.innerHTML = notes
+        let notes = ""
+        input.forEach(note => {
+            let li = `<li class="list-group-item">${note}</li>`
+            notes = notes + li
+        })
+        noteTextArea.value = ""
+        noteList.innerHTML = notes
     }
 
     saveNoteBtn.addEventListener("click", event => {
@@ -72,10 +73,10 @@ document.addEventListener("DOMContentLoaded", event => {
                     note: newNoteValue,
                     article: saveNoteBtn.getAttribute("data-title")
                 }
-            }).then(response =>
-                console.log(response)
-                //populateCommentList(response.comments)
-            )
+            }).then(response => {
+                const commentsArr = response.comments
+                populateCommentList(commentsArr)
+            })
         }
     })
 
