@@ -2,7 +2,10 @@ document.addEventListener("DOMContentLoaded", event => {
     const articleContainer = document.getElementById("articleContainer");
     const scraperBtn = document.getElementById("scraper");
     const clearArticlesBtn = document.getElementById("clear");
-    const noteModal = document.getElementById("noteModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const noteList = document.getElementById("noteList");
+    const noteTextArea = document.getElementById("newNoteTextArea");
+    const saveNoteBtn = document.getElementById("saveNewNote");
 
     articleContainer.addEventListener("click", event => {
         const cardContainer = this.event.target.parentElement.parentElement.parentElement
@@ -18,30 +21,47 @@ document.addEventListener("DOMContentLoaded", event => {
                 data: data
 
             }).then(result => cardContainer.parentElement.removeChild(cardContainer));
-        } else if(this.event.target.id === "deleteButton") {
+        } else if (this.event.target.id === "deleteButton") {
 
             $.ajax({
                 method: "POST",
                 url: "/api/delete",
-                data: {title: this.event.target.getAttribute('data-title')}
+                data: { title: this.event.target.getAttribute('data-title') }
 
             }).then(response => cardContainer.parentElement.removeChild(cardContainer));
         } else if (this.event.target.id === "noteButton") {
+            const articleTitle = this.event.target.getAttribute("data-title")
+
+            modalTitle.innerHTML = articleTitle
 
             $.ajax({
                 method: "GET",
-                url: `api/article/${this.event.target.getAttribute('data-title')}`
+                url: `api/article/${articleTitle}`
             }).then(response => {
-                console.log(response)
+                let notes = ""
+                if (response.length > 0) {
+                    response.forEach(note => {
+                        let li = `<li class="list-group-item">${note}</li>`
+                        notes = notes + li
+                    })
+                    noteList.innerHTML = notes
+                }
                 $("#noteModal").modal('toggle');
             })
-            // $.ajax({
-            //     method: "POST",
-            //     url: `api/article/${this.event.target.getAttribute('data-title')}`
-            //     data: //value of form
-            // })
         }
     });
+
+    saveNoteBtn.addEventListener("click", event => {
+        const newNoteValue = noteTextArea.value
+        console.log(newNoteValue)
+
+        // $.ajax({
+        //     method: "POST",
+        //     url: `api/article/${this.event.target.getAttribute('data-title')}`,
+        //     data: newNoteValue
+        // })
+
+    })
 
     scraperBtn.addEventListener("click", event => {
         $.ajax({
