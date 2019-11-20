@@ -2,25 +2,35 @@ document.addEventListener("DOMContentLoaded", event => {
     const articleContainer = document.getElementById("articleContainer");
     const scraperBtn = document.getElementById("scraper");
     const clearArticlesBtn = document.getElementById("clear");
+    const savedArticleContainer = document.getElementById("saved-article-container")
 
     articleContainer.addEventListener("click", event => {
+        const cardContainer = this.event.target.parentElement.parentElement.parentElement
         if (this.event.target.id === "saveButton") {
-            const cardContainer = this.event.target.parentElement.parentElement.parentElement
-
             const data = {
                 title: this.event.target.getAttribute('data-title'),
                 summary: this.event.target.getAttribute('data-summary'),
                 link: this.event.target.getAttribute('data-link')
             }
+
             $.ajax({
                 method: "POST",
-                url: "/save",
+                url: "/api/save",
                 data: data
+                
             }).then(result => cardContainer.parentElement.removeChild(cardContainer));
-        };
+        } else if(this.event.target.id === "deleteButton") {
+
+            $.ajax({
+                method: "POST",
+                url: "/api/delete",
+                data: {title: this.event.target.getAttribute('data-title')}
+
+            }).then(response => cardContainer.parentElement.removeChild(cardContainer));
+        } else if (this.event.target.id === "noteButton") {
+
+        }
     });
-
-
 
     scraperBtn.addEventListener("click", event => {
         $.ajax({

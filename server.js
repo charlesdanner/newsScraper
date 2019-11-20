@@ -44,14 +44,21 @@ app.get("/", (req, res) => {
     });
 })
 
-app.post("/save", (req, res) => {
-    console.log(req.body)
+app.post("/api/save", (req, res) => {
     db.Article.create({
         title: req.body.title,
         link: req.body.link,
         summary: req.body.summary
     }).then(res.json({complete: true}))
     .catch(err => res.json(err))
+});
+
+app.post("/api/delete", (req,res) => {
+    console.log(req.body)
+    db.Article.remove({
+        title: req.body.title
+    }).then(res.json({deleted: true}))
+    .catch(err => console.log(err))
 })
 
 app.get("/scrape", (req, res) => {
