@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", event => {
                     article: saveNoteBtn.getAttribute("data-title")
                 }
             }).then(response => {
+                console.log(response)
                 const commentsArr = response.comments
                 populateCommentList(commentsArr)
             })

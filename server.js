@@ -56,14 +56,14 @@ app.post("/api/save", (req, res) => {
 app.get("/api/article/:title", (req, res) => {
     console.log(req.params.title)
     db.Article.findOne({ title: req.params.title })
-    .populate("Comment")
+    .populate("comments")
     .then(dbArticle => {
+        console.log(dbArticle)
         res.json(dbArticle.comments)
     })
 })
 
 app.post("/api/article/add-note", (req, res) => {
-    // Create a new note and pass the req.body to the entry
     console.log(req.body)
     db.Comment.create({
         body: req.body.note
@@ -73,7 +73,7 @@ app.post("/api/article/add-note", (req, res) => {
             return db.Article.findOneAndUpdate({ title: req.body.article }, {$push: { comments: dbComment.body }}, { new: true });
         })
         .then(dbArticle => {
-            dbArticle.populate("Comment")
+            dbArticle.populate("comments")
             res.json(dbArticle);
         })
         .catch(err => {
