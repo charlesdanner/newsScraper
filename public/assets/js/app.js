@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", event => {
     const noteList = document.getElementById("noteList");
     const noteTextArea = document.getElementById("newNoteTextArea");
     const saveNoteBtn = document.getElementById("saveNewNote");
+    var targetArticle;
 
     articleContainer.addEventListener("click", event => {
         const cardContainer = this.event.target.parentElement.parentElement.parentElement
@@ -32,43 +33,50 @@ document.addEventListener("DOMContentLoaded", event => {
         } else if (this.event.target.id === "noteButton") {
             const articleTitle = this.event.target.getAttribute("data-title")
 
+
             modalTitle.innerHTML = articleTitle
 
             $.ajax({
                 method: "GET",
                 url: `api/article/${articleTitle}`
             }).then(response => {
-                let notes = ""
-                if (response.length > 0) {
-                    response.forEach(note => {
-                        let li = `<li class="list-group-item">${note}</li>`
-                        notes = notes + li
-                    })
-                    noteList.innerHTML = notes
-                }
+                saveNoteBtn.setAttribute("data-title", articleTitle)
+                populateCommentList(response)
                 $("#noteModal").modal('toggle');
             })
         }
     });
 
+    const populateCommentList = (input) => {
+            let notes = ""
+            input.forEach(note => {
+                let li = `<li class="list-group-item">${note}</li>`
+                notes = notes + li
+            })
+            noteList.innerHTML = notes
+    }
+
     saveNoteBtn.addEventListener("click", event => {
-        const containsSpecialCharacters = str =>{
+        const containsSpecialCharacters = str => {
             var regex = /[ @#$%^&*()_+\-=\[\]{};:"\\|<>\/]/g;
             return regex.test(str);
         }
-        
+
         const newNoteValue = noteTextArea.value.trim()
         console.log(containsSpecialCharacters(newNoteValue))
         if (newNoteValue !== undefined && containsSpecialCharacters(newNoteValue) === false) {
-
+            $.ajax({
+                method: "POST",
+                url: `api/article/add-note`,
+                data: {
+                    note: newNoteValue,
+                    article: saveNoteBtn.getAttribute("data-title")
+                }
+            }).then(response =>
+                console.log(response)
+                //populateCommentList(response.comments)
+            )
         }
-
-        // $.ajax({
-        //     method: "POST",
-        //     url: `api/article/${this.event.target.getAttribute('data-title')}`,
-        //     data: newNoteValue
-        // })
-
     })
 
     scraperBtn.addEventListener("click", event => {
