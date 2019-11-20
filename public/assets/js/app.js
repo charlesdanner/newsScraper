@@ -52,8 +52,16 @@ document.addEventListener("DOMContentLoaded", event => {
     });
 
     saveNoteBtn.addEventListener("click", event => {
-        const newNoteValue = noteTextArea.value
-        console.log(newNoteValue)
+        const containsSpecialCharacters = str =>{
+            var regex = /[ @#$%^&*()_+\-=\[\]{};:"\\|<>\/]/g;
+            return regex.test(str);
+        }
+        
+        const newNoteValue = noteTextArea.value.trim()
+        console.log(containsSpecialCharacters(newNoteValue))
+        if (newNoteValue !== undefined && containsSpecialCharacters(newNoteValue) === false) {
+
+        }
 
         // $.ajax({
         //     method: "POST",
