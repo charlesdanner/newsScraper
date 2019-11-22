@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", event => {
         } else if (this.event.target.id === "noteButton") {
             const articleTitle = this.event.target.getAttribute("data-title")
 
-
+            console.log(articleTitle)
             modalTitle.innerHTML = articleTitle
 
             $.ajax({
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     saveNoteBtn.addEventListener("click", event => {
         const containsSpecialCharacters = str => {
-            var regex = /[ @#$%^&*()_+\-=\[\]{};:"\\|<>\/]/g;
+            var regex = /[@#$%^&*()_+\-=\[\]{};:"\\|<>\/]/g;
             return regex.test(str);
         }
 

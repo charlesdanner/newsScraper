@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const exphbs = require("express-handlebars")
+const logger = require("morgan")
 
 const db = require("./models")
 
@@ -56,8 +57,8 @@ app.post("/api/save", (req, res) => {
 app.get("/api/article/:title", (req, res) => {
     console.log(req.params.title)
     db.Article.findOne({ title: req.params.title })
-    .populate("comments")
     .then(dbArticle => {
+        dbArticle.populate("comments")
         console.log(dbArticle)
         res.json(dbArticle.comments)
     })
