@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", event => {
     var targetArticle;
 
     articleContainer.addEventListener("click", event => {
-        const cardContainer = this.event.target.parentElement.parentElement.parentElement
-        if (this.event.target.id === "saveButton") {
+        console.log(this.event.target)
+        const cardContainer = this.event.target.parentElement.parentElement
+        if (this.event.target.id === "saveArticle") {
+            console.log(this.event.target.id)
             const data = {
                 title: this.event.target.getAttribute('data-title'),
                 summary: this.event.target.getAttribute('data-summary'),
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", event => {
         input.forEach(note => {
             let li = 
             `
-                <li class=" container-fluid list-group-item">
+                <li class=" container-fluid white-text list-group-item">
                     <button class="d-block btn btn-danger note-delete">x</button>
                     <h4 class="d-inline note-list-item">${note}</h4>
                 </li>`
