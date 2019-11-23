@@ -5,11 +5,11 @@ html {
   
   body {
     margin-bottom: 80px;
-    background-image: url("../images/paper.png");
+    background-color: #1a0708
   }
   
   .card a:not([href]):not([tabindex]).scrape-new {
-    color: #2196F3;
+    color: #390b0e;
   }
   
   .footer {
@@ -18,7 +18,7 @@ html {
     width: 100%;
     height: 80px;
     color: white;
-    background-color: #2196f3;
+    background-color: #390b0e;
   }
   
   .navbar {
@@ -31,7 +31,7 @@ html {
     height: 500px;
     padding: 0;
     font-family: "Cormorant SC";
-    box-shadow: 10px 5px 20px 2px lightslategrey;
+    box-shadow: 10px 5px 5px 2px black;
   }
   
   .jumbotron .overlay {
@@ -41,13 +41,13 @@ html {
     bottom: 0;
     left: 0;
     z-index: auto;
-    background: linear-gradient(#333, black);
+    background: linear-gradient(#333, #390b0e);
     opacity: 0.7;
   }
   
   .jumbotron .background-image {
     height: 100%;
-    background-image: url("../images/newspaper.jpg");
+    background-image: url("../images/60Minutes.jpg");
     background-size: cover;
   }
   
@@ -78,12 +78,12 @@ html {
   
   .card {
     border-radius: 0;
-    box-shadow: 3px 3px 20px lightslategrey;
+    box-shadow: 3px 3px 5px black;
     margin: 20px 0;
   }
   
   .card .card-header {
-    background-color: #2196f3;
+    background-color: #390b0e;
     position: relative;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -105,12 +105,18 @@ html {
   
   .card .card-body {
     font-size: 16px;
+    background-color: #121212;
+    color: white;
   }
   
   .card .card-header .article-link {
     color: white;
     display: inline-block;
     width: 80%;
+  }
+
+  .card {
+    background-color: #121212
   }
   
   .footer > .container > p {
@@ -162,9 +168,42 @@ html {
     float: right;
     margin: 5px;
   }
+
+  .list-group-item {
+    word-wrap: break-word;
+    padding: 30px;
+  }
   
   .note.list-group-item .btn {
     position: relative;
     bottom: 10px;
   }
+
+  .note-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 22px;
+    padding: 5px;
+
+  }
+
+  .note-list-item {
+    margin: 30px
+  }
+
+  #navbarColor01, .save {
+    background-color: #121212;
+  }
+
+  .navbar {
+    background-color: #121212;
+    color: white;
+  }
+
+  .white-text{
+    color: white;
+  }
+
+
   

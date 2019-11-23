@@ -50,7 +50,12 @@ document.addEventListener("DOMContentLoaded", event => {
     const populateCommentList = (input) => {
         let notes = ""
         input.forEach(note => {
-            let li = `<li class="list-group-item">${note}</li>`
+            let li = 
+            `
+                <li class=" container-fluid list-group-item">
+                    <button class="d-block btn btn-danger note-delete">x</button>
+                    <h4 class="d-inline note-list-item">${note}</h4>
+                </li>`
             notes = notes + li
         })
         noteTextArea.value = ""
@@ -59,7 +64,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
     saveNoteBtn.addEventListener("click", event => {
         const containsSpecialCharacters = str => {
-            var regex = /[@#$%^&*()_+\-=\[\]{};:"\\|<>\/]/g;
+            var regex = /[+\-=\[\]{}\\|<>\/]/g;
             return regex.test(str);
         }
 
