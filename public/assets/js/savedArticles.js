@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", event => {
         input.forEach(note => {
             let li =
                 `
-                <li class=" container-fluid white-text list-group-item">
+                <li class=" container-fluid white-text  notesList list-group-item">
                     <button class="d-block btn btn-danger note-delete">x</button>
                     <h4 class="d-inline note-list-item">${note}</h4>
                 </li>`
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", event => {
             var regex = /[+\-=\[\]{}\\|<>\/]/g;
             return regex.test(str);
         }
-        
+
         if (newNoteValue !== undefined && containsSpecialCharacters(newNoteValue) === false) {
             $.ajax({
                 method: "POST",

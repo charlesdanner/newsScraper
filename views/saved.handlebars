@@ -9,14 +9,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true"
+        <button type="button" class="bootbox-close-button white-text close" data-dismiss="modal" aria-hidden="true"
           style="margin-top: -10px;">×</button>
         <div class="bootbox-body">
           <div class="container-fluid text-center">
-            <h4 id='modalTitle'></h4>
-            <hr>
+            <h4 id='modalTitle' class="white-text"></h4>
+            <hr class="white-text modalHR">
             <ul id="noteList" class="list-group note-container">
-              <li class="list-group-item">No notes for this article yet.</li>
+              <li class="list-group-item notesList">No notes for this article yet.</li>
             </ul>
             <textarea id="newNoteTextArea" placeholder="New Note" rows="4" cols="60"></textarea>
             <button id="saveNewNote" class="btn btn-success save">Save Note</button>
@@ -32,7 +32,7 @@
   <div data-_id="{{this._id}}" class="card">
     <div class="card-header">
       <h3 class="container-fluid">
-        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
+        <a class="article-link saved-article-link" target="_blank" rel="noopener noreferrer" href="{{this.link}}">{{this.title}}</a>
         
       </h3>
       <a class="btn btn-danger delete white-text" id="deleteButton" data-title="{{this.title}}">Delete Article</a>

@@ -116,7 +116,7 @@ body {
 .card .card-header .article-link {
   color: white;
   display: inline-block;
-  margin-right: 200px;
+  margin-right: 280px;
 }
 
 .card {
@@ -212,3 +212,24 @@ textarea {
 #deleteButton, #noteButton, .save {
   color: white;
 }
+
+.modal-content {
+  background-color: #390b0e;
+}
+
+.notesList {
+  background-color: #121212;
+  border: 2px solid #390b0e;
+}
+
+textArea {
+  margin-top: 30px;
+  background-color: #121212;
+  color: white;
+
+}
+
+.modalHR {
+  background-color: white;
+}
+

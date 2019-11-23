@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", event => {
     const articleContainer = document.getElementById("articleContainer");
     const scraperBtn = document.getElementById("scraper");
-    const clearArticlesBtn = document.getElementById("clear");
 
     articleContainer.addEventListener("click", event => {
         console.log(this.event.target)
@@ -59,8 +58,5 @@ document.addEventListener("DOMContentLoaded", event => {
             })
     })
 
-    clearArticlesBtn.addEventListener("click", event => {
-        articleContainer.innerHTML = ""
-    })
 
 });
