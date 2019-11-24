@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", event => {
     const noteList = document.getElementById("noteList");
     const noteTextArea = document.getElementById("newNoteTextArea");
     const saveNoteBtn = document.getElementById("saveNewNote");
+    let titleForCommentSection;
 
     const populateCommentList = input => {
         let notes = ""
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", event => {
             let li =
                 `
                 <li class=" container-fluid white-text  notesList list-group-item">
-                    <button class="d-block btn btn-danger note-delete">x</button>
+                    <button class="d-block btn btn-danger note-delete" id="deleteComment" data-comment="${note}" data-title="${titleForCommentSection}" >x</button>
                     <h4 class="d-inline note-list-item">${note}</h4>
                 </li>`
             notes = notes + li
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", event => {
 
             console.log(articleTitle)
             modalTitle.innerHTML = articleTitle
+            titleForCommentSection= articleTitle
 
             $.ajax({
                 method: "GET",
@@ -46,6 +48,30 @@ document.addEventListener("DOMContentLoaded", event => {
             })
         }
     });
+
+    noteList.addEventListener("click", event => {
+
+        if (this.event.target.id === "deleteComment") {
+            const commentContainer = this.event.target.parentElement
+            const comment = this.event.target.getAttribute("data-comment")
+            const postTitle = this.event.target.getAttribute("data-title")
+            console.log("hello")
+            console.log(comment)
+            console.log(postTitle)
+
+
+            $.ajax({
+                method: "POST",
+                url: `/api/article/remove-comment`,
+                data: {
+                    title: postTitle,
+                    comment: comment
+                }
+            }).then(response => {
+                commentContainer.parentElement.removeChild(commentContainer)
+            })
+        }
+    })
 
     saveNoteBtn.addEventListener("click", event => {
         const newNoteValue = noteTextArea.value.trim()
@@ -70,4 +96,6 @@ document.addEventListener("DOMContentLoaded", event => {
             })
         }
     })
+
+    
 })

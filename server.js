@@ -65,6 +65,20 @@ app.post("/api/article/add-note", (req, res) => {
         });
 })
 
+app.post("/api/article/remove-comment", (req, res) => {
+    db.Article.findOne({title: req.body.title})
+    .then(dbArticle => {
+        const dbArticleTitle = dbArticle.title
+        dbArticle.comments.remove(req.body.comment)
+        console.log(`La la la ${dbArticle.comments}`)
+        db.Article.updateOne({title: req.body.title}, {$set:{comments: dbArticle.comments}})
+        .then((res.json({removed: true})))
+        
+        
+    })
+    
+})
+
 app.post("/api/delete", (req, res) => {
     console.log(req.body)
     db.Article.remove({
