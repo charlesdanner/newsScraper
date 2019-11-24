@@ -2,29 +2,38 @@ document.addEventListener("DOMContentLoaded", event => {
     const articleContainer = document.getElementById("articleContainer");
     const scraperBtn = document.getElementById("scraper");
 
+    const API = {
+        ajax: {
+            get: function (targetURL) {
+                return $.ajax({
+                    method: "GET",
+                    url: targetURL
+                })
+            },
+            post: function (targetURL, data) {
+                return $.ajax({
+                    method: "POST",
+                    url: targetURL,
+                    data: data
+                })
+            }
+        }
+    }
+
     articleContainer.addEventListener("click", event => {
-        console.log(this.event.target)
         const cardContainer = this.event.target.parentElement.parentElement
         if (this.event.target.id === "saveArticle") {
-            console.log(this.event.target.id)
             const data = {
                 title: this.event.target.getAttribute('data-title'),
                 summary: this.event.target.getAttribute('data-summary'),
                 link: this.event.target.getAttribute('data-link')
             }
-            $.ajax({
-                method: "POST",
-                url: "/api/save",
-                data: data
-
-            }).then(result => cardContainer.parentElement.removeChild(cardContainer));
+            API.ajax.post("/api/save", data)
+                .then(result => cardContainer.parentElement.removeChild(cardContainer));
         }
     });
     scraperBtn.addEventListener("click", event => {
-        $.ajax({
-            method: "GET",
-            url: "/scrape"
-        })
+        API.ajax.get("/api/scrape")
             .then(data => {
                 let cardHolder = ""
                 data.articles.forEach(article => {
@@ -41,7 +50,6 @@ document.addEventListener("DOMContentLoaded", event => {
                     cardHolder = cardHolder + card
                 })
                 articleContainer.innerHTML = cardHolder
-
             })
     })
 
