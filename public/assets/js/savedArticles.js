@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded", event => {
     const noteList = document.getElementById("noteList");
     const noteTextArea = document.getElementById("newNoteTextArea");
     const saveNoteBtn = document.getElementById("saveNewNote");
+    const scrapeBtn = document.getElementById("scraper")
     let titleForCommentSection;
 
+    scrapeBtn.style.display = "none"
     const API = {
         ajax: {
             get: function (targetURL) {
