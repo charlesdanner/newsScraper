@@ -23,3 +23,5 @@ This web application utilizes an express server and various node modules to scra
 When a user visits the home page, the Express server sends a get request to the 60 minutes website. When the response from 60 minutes comes back, the html is parsed using the node module Cheerio and the information is packaged into objects. Each article that is sent to the Express server has a corresponding object that stores the article's title, summary and link to the article. The objects are stored in an array and the Express server uses this information in conjunction with Express-Handlebars to render the webpage for our client. What the client sees is a list of articles and a slick web page.
 
 Each article is saved into a Mongo database. This allows the server to keep track of which articles have comments and which the clients want to save for adding notes to. All of the different HTTP requests are being sent through Ajax, and Express is handling the requests. 
+
+The front end styling is mostly being done with the use of the BootStrap library.
